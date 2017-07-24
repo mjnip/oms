@@ -1,0 +1,160 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "_artifactsLocationSasToken": {
+      "type": "securestring",
+      "metadata": {
+        "_artifactsLocationSasToken": "sas url created in deploy ps"
+      }
+    },
+    "_artifactsLocation": {
+      "type": "string",
+      "metadata": {
+        "_artifactsLocation": "url of storage path created in deploy ps"
+      }
+    },
+    "linux-rg": {
+      "type": "string"
+    },
+    "win-rg": {
+      "type": "string"
+    },
+    "vnet-rg": {
+      "type": "string",
+      "metadata": {
+        "vnet-rg": "Resource Group of the vnet"
+      }
+    },
+    "vnet-name": {
+      "type": "string"
+    },
+    "vnetsubnet": {
+      "type": "string"
+    },
+    "vnet2-rg": {
+      "type": "string",
+      "metadata": {
+        "vnet-rg": "Resource Group of the vnet"
+      }
+    },
+    "vnet2-name": {
+      "type": "string"
+    },
+    "vnet2subnet": {
+      "type": "string"
+    },
+    "vmAdminUserName": {
+      "type": "string"
+    },
+    "vmAdminPassword": {
+      "type": "securestring"
+    },
+    "workspaceid": {
+      "type": "string",
+      "metadata": {
+        "description": "workspaceid"
+      }
+    },
+    "workspacekey": {
+      "type": "securestring",
+      "metadata": {
+        "description": "oms workspacekey"
+      }
+    }
+  },
+  "variables": {
+    "scriptUri": "[parameters('_artifactsLocation')]",
+    "sas": "[parameters('_artifactsLocationSasToken')]"
+  },
+  "resources": [
+    {
+      "apiVersion": "2017-05-10",
+      "name": "winvmoms",
+      "type": "Microsoft.Resources/deployments",
+      "resourceGroup": "[parameters('win-rg')]",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('scriptUri'), '/vm-win.json', variables('sas'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "scriptUri": {
+            "value": "[variables('scriptUri')]"
+          },
+          "sas": {
+            "value": "[variables('sas')]"
+          },
+          "vnet-rg": {
+            "value": "[parameters('vnet-rg')]"
+          },
+          "vnet-name": {
+            "value": "[parameters('vnet-name')]"
+          },
+          "vnetSubnetName": {
+            "value": "[parameters('vnetsubnet')]"
+          },
+          "vmAdminUserName": {
+            "value": "[parameters('vmAdminUserName')]"
+          },
+          "vmAdminPassword": {
+            "value": "[parameters('vmAdminPassword')]"
+          },
+          "workspaceid": {
+            "value": "[parameters('workspaceid')]"
+          },
+          "workspacekey": {
+            "value": "[parameters('workspacekey')]"
+          }
+        }
+      }
+    },
+
+    {
+      "apiVersion": "2017-05-10",
+      "name": "rhelvmoms",
+      "type": "Microsoft.Resources/deployments",
+      "resourceGroup": "[parameters('linux-rg')]",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[concat(variables('scriptUri'), '/vm-rhel.json', variables('sas'))]",
+          "contentVersion": "1.0.0.0"
+        },
+        "parameters": {
+          "scriptUri": {
+            "value": "[variables('scriptUri')]"
+          },
+          "sas": {
+            "value": "[variables('sas')]"
+          },
+          "vnet-rg": {
+            "value": "[parameters('vnet2-rg')]"
+          },
+          "vnet-name": {
+            "value": "[parameters('vnet2-name')]"
+          },
+          "vnetSubnetName": {
+            "value": "[parameters('vnet2subnet')]"
+          },
+          "vmAdminUserName": {
+            "value": "[parameters('vmAdminUserName')]"
+          },
+          "vmAdminPassword": {
+            "value": "[parameters('vmAdminPassword')]"
+          },
+          "workspaceid": {
+            "value": "[parameters('workspaceid')]"
+          },
+          "workspacekey": {
+            "value": "[parameters('workspacekey')]"
+          }
+        }
+      }
+    }
+    
+  ],
+  "outputs": {   
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "win-rg": {
+      "value": "td-oms-vm"
+    },
+    "linux-rg": {
+      "value": "td-oms-vm-rhel"
+    },
+    "vnet-rg": {
+      "value": "MarkIT-Network"
+    },
+    "vnet-name": {
+      "value": "markit-vnet"
+    },
+    "vnetsubnet": {
+      "value": "default"
+    },
+    "vnet2-rg": {
+      "value": "MarkIT-Network"
+    },
+    "vnet2-name": {
+      "value": "markit-vnet"
+    },
+    "vnet2subnet": {
+      "value": "default"
+    },
+    "vmAdminUserName": {
+      "value": "nipadmin"
+    },
+    "vmAdminPassword": {
+      "value": "SuperSecure56"
+    },
+    "workspaceid": {
+      "value": "4373f45b-049d-4c9a-be09-ce155f440625"
+    },
+    "workspacekey": {
+      "value": "tCmIP33UvaLNoY9awbtgG6SrpJKrx7Mcqo/mC4LO5+EKql3QZUOjmsb+Xrv0VyQ1Z4d2VeW9E3hXN7xPAZ55Xg=="
+    }
+  }
+}

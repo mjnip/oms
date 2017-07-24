@@ -28,11 +28,14 @@
     <None Include="Deployment.targets">
       <Visible>False</Visible>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="deploy\" />
-    <Folder Include="scripts\" />
-    <Folder Include="templates\" />
+    <None Include="deploy\common.ps1" />
+    <None Include="deploy\Deploy-AzureResourceGroup.ps1" />
+    <None Include="scripts\enableNPM.ps1" />
+    <None Include="scripts\enableNPM.sh" />
+    <None Include="templates\mainTemplate.json" />
+    <None Include="templates\mainTemplate.parameters.json" />
+    <None Include="templates\vm-rhel.json" />
+    <None Include="templates\vm-win.json" />
   </ItemGroup>
   <Target Name="GetReferenceAssemblyPaths" />
 </Project>
